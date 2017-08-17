@@ -1,0 +1,23 @@
+#parse("/velocity/govuk_layout.vm")
+#@mainLayout()
+	<table>
+		<tbody>		
+			#foreach($book in $books)
+			<tr>
+				<th>
+					<a class="book" href="$WebPath.getBOOKS()$book.getIsbn()">
+					$msg.get("BOOKS_CAPTION", $book.getTitle(), $book.getAuthor())
+					</a>
+				</th>
+				<th>
+					<a class="book" href="$WebPath.getBOOKS()$book.getIsbn()">
+					<div class="bookCover">
+					<img src="$book.getMediumCover()" alt="$book.getTitle()" style="min-height: 200px; max-height: 200px;">
+					</div>
+					</a>
+				</th>
+			</tr>
+			#end		
+		</tbody>
+	</table>
+#end

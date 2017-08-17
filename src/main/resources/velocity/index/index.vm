@@ -1,0 +1,17 @@
+#parse("/velocity/govuk_layout.vm")
+#@mainLayout()
+<h1 class="heading-xlarge">Lending Library</h1>
+<p class="lede">Welcome to the national GOV.UK Lending Library service.</p>
+#if($authenticationSucceeded)
+    <p class="good notification">$msg.get("SIGNIN_AUTH_SUCCEEDED", $currentUser)</p>
+#end
+<div class="panel panel-border-wide">
+	<p>$msg.get("INDEX_REGISTERED_USERS", $users.size())</p>
+	<ul class="list list-bullet">
+		#foreach($user in $users)
+			<li>$user</li>
+		#end
+	</ul>
+	<p>$msg.get("INDEX_PASSWORD_INFO")</p>
+</div>
+#end
