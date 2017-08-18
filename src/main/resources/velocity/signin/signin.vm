@@ -1,20 +1,8 @@
 #parse("/velocity/govuk_layout.vm")
 #@mainLayout()
 <h1 class="heading-xlarge">$msg.get("SIGNIN_HEADING")</h1>
-<p class="lede">$msg.get("SIGNIN_INSTRUCTIONS", $WebPath.getINDEX())</p>	
 <div class="form-group ">
-    #if($authenticationFailed)	    
-		<div class="notice">
-			<i class="icon icon-important">
-				<span class="visually-hidden">Warning</span>
-			</i>
-			<strong class="bold-small">
-				$msg.get("SIGNIN_AUTH_FAILED")
-			</strong>
-		</div>	    
-    #elseif($authenticationSucceeded)
-        <p>$msg.get("SIGNIN_AUTH_SUCCEEDED", $currentUser)</p>
-    #elseif($loggedOut)
+    #if($signedOut)
 		<div class="notice">
 			<i class="icon icon-important">
 				<span class="visually-hidden">Warning</span>
@@ -25,14 +13,26 @@
 		</div>	  
     #end
 </div>
+<p class="lede">$msg.get("SIGNIN_INSTRUCTIONS", $WebPath.getINDEX())</p>	
 <form id="signinForm" method="post">
+	#if($authenticationFailed)
+	<div class="form-group form-group-error">
+		<span class="error-message">
+			$msg.get("SIGNIN_AUTH_FAILED")
+		</span>
+	#else
 	<div class="form-group">
+	#end          
         <div class="form-field">
             <label class="form-label" for="username">$msg.get("SIGNIN_LABEL_USERNAME")</label>
             <input class="form-control" type="text" id="username" name="username" placeholder="$msg.get("SIGNIN_LABEL_USERNAME")" value="" required />
         </div>
     </div>
+	#if($authenticationFailed)
+	<div class="form-group form-group-error">
+	#else
 	<div class="form-group">
+	#end
         <div class="form-field">
             <label class="form-label" for="password">$msg.get("SIGNIN_LABEL_PASSWORD")</label>
             <input class="form-control" type="password" id="password" name="password" placeholder="$msg.get("SIGNIN_LABEL_PASSWORD")" value="" required />
