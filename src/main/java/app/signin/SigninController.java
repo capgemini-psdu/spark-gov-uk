@@ -5,6 +5,7 @@ import app.util.*;
 import spark.*;
 import java.util.*;
 import static app.util.RequestUtil.*;
+import static app.Application.userDao;
 
 public class SigninController {
 
@@ -20,7 +21,8 @@ public class SigninController {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.SIGNIN);
         }
-        request.session().attribute("currentUser", getQueryUsername(request));
+//        request.session().attribute("currentUser", getQueryUsername(request));
+        request.session().attribute("currentUser", userDao.getUserByUsername(getQueryUsername(request)));
         if (getQuerySigninRedirect(request) != null) {
             response.redirect(getQuerySigninRedirect(request));
         }

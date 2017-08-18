@@ -1,11 +1,21 @@
 package app.util;
 
-import org.apache.velocity.app.*;
-import org.eclipse.jetty.http.*;
-import spark.*;
-import spark.template.velocity.*;
-import java.util.*;
-import static app.util.RequestUtil.*;
+import static app.util.RequestUtil.getSessionCurrentUser;
+import static app.util.RequestUtil.getSessionLocale;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.velocity.app.VelocityEngine;
+import org.eclipse.jetty.http.HttpStatus;
+
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.Route;
+import spark.template.velocity.VelocityTemplateEngine;
 
 public class ViewUtil {
 
@@ -15,7 +25,9 @@ public class ViewUtil {
     public static String render(Request request, Map<String, Object> model, String templatePath) {
         model.put("msg", new MessageBundle(getSessionLocale(request)));
         model.put("currentUser", getSessionCurrentUser(request));
-        model.put("WebPath", Path.Web.class); // Access application URLs from templates
+        model.put("WebPath", Path.Web.class); // Access application URLs from templates        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM YYYY");        
+        model.put("lastSignin", LocalDateTime.now().format(formatter));
         return strictVelocityEngine().render(new ModelAndView(model, templatePath));
     }
 

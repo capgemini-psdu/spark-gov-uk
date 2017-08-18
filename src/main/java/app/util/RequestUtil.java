@@ -1,6 +1,7 @@
 package app.util;
 
-import spark.*;
+import app.user.User;
+import spark.Request;
 
 public class RequestUtil {
 
@@ -32,7 +33,7 @@ public class RequestUtil {
         return request.session().attribute("locale");
     }
 
-    public static String getSessionCurrentUser(Request request) {
+    public static User getSessionCurrentUser(Request request) {
         return request.session().attribute("currentUser");
     }
 

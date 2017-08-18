@@ -87,15 +87,19 @@
       </div>
     </header>
     
-
-    
-
     <div id="global-header-bar"></div>
 
     <!-- Page content goes here -->
 
-	<main id="content" role="main" tabindex="-1">
+	<main id="content" role="main" tabindex="-1">    
+		<div class="inner-block print-hide">
+			<div class="phase-banner">
+				<p><strong class="phase-tag">ALPHA</strong><span>This is a new service - your feedback will help us to improve it.</span></p>
+			</div>
+		</div>
+		
 		$bodyContent
+		
 	</main>
 
     <footer class="group js-footer" id="footer" role="contentinfo">

@@ -18,10 +18,19 @@
 	    <p>
 	    	#if($currentUser)
 	    		<div id="global-header-bar"></div>
-	    		<h3 id="welcome-text"> 
-    				Welcome, $currentUser
+	    		<h4 class="heading-small"> 
+    				Welcome, $currentUser.getFirstName() $currentUser.getLastName()
 				</h3>
-	    		<p>$msg.get("SIGNIN_AUTH_SUCCEEDED", $currentUser)</p>
+	    		<p>$msg.get("SIGNIN_AUTH_SUCCEEDED", $currentUser.getUsername())</p>
+				<p>Last sign in on $lastSignin</p>
+				<details>
+					<summary>
+						<span class="summary">Not right?</span>		
+					</summary>	
+					<div class="panel panel-border-narrow">	
+						<p>Contact us if it wasn't you.</p>
+					</div>
+				</details
 			#end
 		</p>
 	</div>
